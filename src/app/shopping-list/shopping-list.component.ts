@@ -12,4 +12,7 @@ export class ShoppingListComponent {
     new Ingredient('Farinha Panko', 2),
   ];
 
+  onIngredientesAdded(ingredient: Ingredient){
+    this.ingredients.push(ingredient);
+  }
 }

@@ -7,15 +7,7 @@
 <div class="row">
     <div class="col-xs-12">
         @for(r of recipes; track r.name){
-        <a href="#" class="list-group-item clearfix">
-            <div>
-                <h4 class="list-group-item-heading">{{r.name}}</h4>
-                <p class="list-group-item-text">{{r.description}}</p>
-                <span class="pull-right">
-                    <img src={{r.imagePath}} alt={{r.name}} class="img-responsive" style="max-height: 50px;">
-                </span>
-            </div>
-        </a>
-    }
+            <app-recipe-item [r]="r" (recipeSelected)="onRecipesSelected(r)" ></app-recipe-item>
+        }
     </div>
 </div>
