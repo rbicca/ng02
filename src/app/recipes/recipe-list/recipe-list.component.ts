@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { Recipe } from '../recipe.model';
+import { RecipeService } from '../recipes.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -7,16 +8,12 @@ import { Recipe } from '../recipe.model';
   styleUrl: './recipe-list.component.css'
 })
 export class RecipeListComponent {
+  recipes: Recipe[];
+  
+  constructor(private recipesSvs: RecipeService){}
 
-  @Output() recipeWasSelected = new EventEmitter<Recipe>();
-
-  recipes: Recipe[] = [
-    new Recipe('Bife a Parmegiana', 'Receita bem empanada...', 'https://img.saborosos.com.br/imagens/bife-a-parmegiana.jpg'),
-    new Recipe('Estrogonofe', 'Carne picada com...', 'https://www.receitasnestle.com.br/sites/default/files/srh_recipes/861d71239103ef70f76554abf688bfc8.jpg'),
-  ];
-
-  onRecipesSelected(recipe: Recipe) {
-    this.recipeWasSelected.emit(recipe);
+  ngOnInit(){
+    this.recipes = this.recipesSvs.getRecipes();
   }
   
 }
