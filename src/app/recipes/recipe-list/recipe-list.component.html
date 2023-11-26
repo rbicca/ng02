@@ -1,13 +1,13 @@
 <div class="row">
     <div class="col-xs-12">
-        <button class="btn btn-success">Nova Receita</button>
+        <button class="btn btn-success" (click)="onNew()" >Nova Receita</button>
     </div>
 </div>
 <hr>
 <div class="row">
     <div class="col-xs-12">
-        @for(r of recipes; track r.name){
-            <app-recipe-item [r]="r" ></app-recipe-item>
+        @for(r of recipes; track $index){
+            <app-recipe-item [r]="r" [idRecipe]="$index"  ></app-recipe-item>
         }
     </div>
 </div>

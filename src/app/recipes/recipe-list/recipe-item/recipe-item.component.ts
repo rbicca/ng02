@@ -9,10 +9,12 @@ import { RecipeService } from '../../recipes.service';
 })
 export class RecipeItemComponent {
   @Input() r : Recipe;
+  @Input() idRecipe: number;
 
-  constructor (private recipesSvs: RecipeService){}
+  //constructor (private recipesSvs: RecipeService){}
 
-  onClick(){
-    this.recipesSvs.recipeSelected.emit(this.r);
-  }
+  // onClick(){
+  //   this.recipesSvs.recipeSelected.emit(this.r);
+  // }
+
 }
