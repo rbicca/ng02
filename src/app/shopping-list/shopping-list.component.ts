@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-shopping-list',
@@ -10,14 +11,19 @@ import { ShoppingListService } from './shopping-list.service';
 export class ShoppingListComponent {
   
   ingredients: Ingredient[] = [];
+  private sub: Subscription;
 
   constructor (private slService: ShoppingListService){}
 
   ngOnInit(){
     this.ingredients = this.slService.getIngredients();
-    this.slService.ingredientsChanged.subscribe((ings)=>{
+    this.sub = this.slService.ingredientsChanged.subscribe((ings)=>{
       this.ingredients = ings;
     });
+  }
+
+  ngOnDestroy(){
+    this.sub.unsubscribe();
   }
 
 }
