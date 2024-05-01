@@ -32,4 +32,9 @@ export class RecipeDetailComponent {
   onComprar(){
     this.recService.Buy(this.recipe.ingredients);
   }
+
+  onExcluir(){
+    this.recService.deleteRecipe(this.id);
+    this.router.navigate(['/recipes']);
+  }
 }

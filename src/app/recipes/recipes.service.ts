@@ -6,7 +6,7 @@ import { Subject } from "rxjs";
 
 @Injectable()
 export class RecipeService {
-
+    
     private recipes: Recipe[] = [
         new Recipe('Bife a Parmegiana', 
                     'Receita bem empanada...', 
@@ -15,6 +15,8 @@ export class RecipeService {
                         new Ingredient('Carne',1),
                         new Ingredient('Farinha',2),
                         new Ingredient('Ovo',1),
+                        new Ingredient('Queijo',3),
+                        new Ingredient('Tomate',2),
                     ]),
         new Recipe('Estrogonofe', 
                     'Carne picada com...', 
@@ -28,6 +30,7 @@ export class RecipeService {
     
     //recipeSelected = new EventEmitter<Recipe>();
     recipeSelected = new Subject<Recipe>();
+    recipesChanged = new Subject<Recipe[]>();
 
     constructor(private slService: ShoppingListService){}
 
@@ -42,4 +45,20 @@ export class RecipeService {
     Buy(ingredients: Ingredient[]){
         this.slService.addIngredients(ingredients);
     }
+
+    addRecipe(recipe: Recipe){
+        this.recipes.push(recipe);
+        this.recipesChanged.next([...this.recipes]);
+    }
+
+    updateRecipe(index: number, newRecipe: Recipe){
+        this.recipes[index] = newRecipe;
+        this.recipesChanged.next([...this.recipes]);
+    }
+
+    deleteRecipe(index: number){
+        this.recipes.splice(index,1);
+        this.recipesChanged.next([...this.recipes]);
+    }
+
 }

@@ -26,4 +26,9 @@ export class ShoppingListComponent {
     this.sub.unsubscribe();
   }
 
+  onEditItem(i: number){
+    //console.log(i);
+    this.slService.startedEditing.next(i);
+  }
+
 }
